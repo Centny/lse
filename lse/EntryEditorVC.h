@@ -25,11 +25,12 @@
 @property(nonatomic)IBOutlet UIView* main;
 @property(nonatomic)IBOutlet UIView* wvbase;
 @property(nonatomic)IBOutlet WKWebView* webview;
+@property(nonatomic)IBOutlet UIButton* edit;
 @property(nonatomic)EditorForm* form;
 //
 -(IBAction)onBack:(id)sender;
 -(IBAction)onRefresh:(id)sender;
 -(IBAction)onProcImg:(id)sender;
 -(IBAction)onProcDesc:(id)sender;
--(IBAction)onProcDone:(id)sender;
+-(IBAction)onEdit:(id)sender;
 @end

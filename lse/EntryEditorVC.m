@@ -7,7 +7,6 @@
 //
 
 #import "EntryEditorVC.h"
-#import "EditorItem.h"
 @implementation Entry
 
 
@@ -79,6 +78,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 //    self.editing=[Entry new];
 //    self.view.backgroundColor=[UIColor redColor];
     NSLog(@"xx->%@",self.url);
@@ -95,6 +95,9 @@
         self.form.frame=CGRectMake(0, 0, FRAM_W(self.main), FRAM_H(self.main));
         self.form.hidden=YES;
         [self.main addSubview:self.form];
+        NSUserDefaults *def=[NSUserDefaults standardUserDefaults];
+        self.form.token=[def objectForKey:@"token"];
+        self.form.base=self.url;
         //
         self.webview=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, FRAM_W(self.wvbase), FRAM_H(self.wvbase)) configuration:[WKWebViewConfiguration new]];
         self.webview.navigationDelegate=self;
@@ -145,8 +148,14 @@
     }];
 }
 
--(IBAction)onProcDone:(id)sender{
-    self.form.hidden=YES;
+-(IBAction)onEdit:(id)sender{
+    if(self.form.hidden){
+        [self.edit setTitle:@"View" forState:UIControlStateNormal];
+        self.form.hidden=NO;
+    }else{
+        [self.edit setTitle:@"Edit" forState:UIControlStateNormal];
+        self.form.hidden=YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

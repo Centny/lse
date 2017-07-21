@@ -16,7 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self toEntryEidtor:@"https://mp.weixin.qq.com/s/Gc6jp74AVqFYYWSlanibGw"];
+    self.lastview.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:.2].CGColor;
+    self.lastview.layer.borderWidth =1.0;
+    //[self toEntryEidtor:@"https://mp.weixin.qq.com/s/Gc6jp74AVqFYYWSlanibGw"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -27,7 +29,11 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self checkPasteboard];
+    if(self.token==nil){
+        [self checkToken];
+    }else{
+        [self checkPasteboard];
+    }
 }
 
 -(void)toEntryEidtor:(NSString*)url{
@@ -61,14 +67,38 @@
     NSString* url=@"http://links.dev.gdy.io/";
     [self performSegueWithIdentifier:@"WebVC" sender:[NSDictionary dictionaryWithObjectsAndKeys:url,@"url", nil]];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)toLogin{
+    [self performSegueWithIdentifier:@"LoginVC" sender:[NSDictionary new]];
 }
-*/
+
+-(void)onReady{
+    [self checkPasteboard];
+}
+
+-(void)checkToken{
+    self.process.hidden=NO;
+    NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
+    [def synchronize];
+    NSString* stoken=[def objectForKey:@"token"];
+    if(stoken==nil||stoken.length<1){
+        [self toLogin];
+        return;
+    }
+    [H doGetj:^(URLRequester *req, NSData *data, NSDictionary *json, NSError *err) {
+        if(err){
+            [self performSelector:@selector(checkToken) withObject:nil afterDelay:3];
+            return;
+        }
+        if([[json checkValueForKey:@"code"]intValue]!=0){
+            [self toLogin];
+            return;
+        }
+        NSDictionary* sdata=[json objectForKey:@"data"];
+        self.token=[sdata objectForKey:@"token"];
+        self.process.hidden=YES;
+        [self onReady];
+    } url:@"http://sso.kuxiao.cn/sso/api/uinfo?token=%@",stoken];
+}
 
 @end

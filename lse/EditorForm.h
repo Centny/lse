@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <iwf/iwf.h>
 
-@interface EditorForm : UIScrollView<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface EditorForm : UIScrollView<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate,UITextViewDelegate>
 @property(nonatomic)IBOutlet UITextView* title;
 @property(nonatomic)IBOutlet UITextField* tags;
 @property(nonatomic)IBOutlet UICollectionView* usedTags;
@@ -21,5 +22,9 @@
 @property(nonatomic)IBOutlet UIButton* submit;
 @property(nonatomic)NSMutableArray* tagList;
 @property(nonatomic)NSMutableArray* fromList;
+//
+@property(nonatomic)NSString* uploaded;
+@property(nonatomic)NSString* token;
+@property(nonatomic)NSString* base;
 -(IBAction)onSubmit:(id)sender;
 @end

@@ -16,8 +16,6 @@
 		1756B7B61F20E5A800A419F4 /* lseUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7B51F20E5A800A419F4 /* lseUITests.m */; };
 		1756B7CF1F20E61600A419F4 /* EditorForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7C41F20E61600A419F4 /* EditorForm.m */; };
 		1756B7D01F20E61600A419F4 /* EditorForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1756B7C51F20E61600A419F4 /* EditorForm.xib */; };
-		1756B7D11F20E61600A419F4 /* EditorItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7C71F20E61600A419F4 /* EditorItem.m */; };
-		1756B7D21F20E61600A419F4 /* EditorItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1756B7C81F20E61600A419F4 /* EditorItem.xib */; };
 		1756B7D31F20E61600A419F4 /* EntryEditorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7CA1F20E61600A419F4 /* EntryEditorVC.m */; };
 		1756B7D41F20E61600A419F4 /* ListEntryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7CC1F20E61600A419F4 /* ListEntryVC.m */; };
 		1756B7D51F20E61600A419F4 /* WebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7CE1F20E61600A419F4 /* WebVC.m */; };
@@ -27,6 +25,9 @@
 		1756B7E81F20E63900A419F4 /* cwf.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1756B7E61F20E63900A419F4 /* cwf.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1756B7EA1F20E63900A419F4 /* ProtocolBuffers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1756B7E91F20E63900A419F4 /* ProtocolBuffers.framework */; };
 		1756B7EB1F20E63900A419F4 /* ProtocolBuffers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1756B7E91F20E63900A419F4 /* ProtocolBuffers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1756B7EF1F20F2D800A419F4 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1756B7EE1F20F2D800A419F4 /* LoginVC.m */; };
+		17EC0B381F21A36000BCE760 /* EditorUsed.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17EC0B371F21A36000BCE760 /* EditorUsed.xib */; };
+		17EC0B3B1F21A9BC00BCE760 /* EditorUsed.m in Sources */ = {isa = PBXBuildFile; fileRef = 17EC0B3A1F21A9BC00BCE760 /* EditorUsed.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,9 +102,6 @@
 		1756B7C31F20E61600A419F4 /* EditorForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorForm.h; sourceTree = "<group>"; };
 		1756B7C41F20E61600A419F4 /* EditorForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorForm.m; sourceTree = "<group>"; };
 		1756B7C51F20E61600A419F4 /* EditorForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorForm.xib; sourceTree = "<group>"; };
-		1756B7C61F20E61600A419F4 /* EditorItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorItem.h; sourceTree = "<group>"; };
-		1756B7C71F20E61600A419F4 /* EditorItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorItem.m; sourceTree = "<group>"; };
-		1756B7C81F20E61600A419F4 /* EditorItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorItem.xib; sourceTree = "<group>"; };
 		1756B7C91F20E61600A419F4 /* EntryEditorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryEditorVC.h; sourceTree = "<group>"; };
 		1756B7CA1F20E61600A419F4 /* EntryEditorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryEditorVC.m; sourceTree = "<group>"; };
 		1756B7CB1F20E61600A419F4 /* ListEntryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListEntryVC.h; sourceTree = "<group>"; };
@@ -113,6 +111,11 @@
 		1756B7D71F20E62900A419F4 /* iwf.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = iwf.xcodeproj; path = libs/iwf/iwf.xcodeproj; sourceTree = "<group>"; };
 		1756B7E61F20E63900A419F4 /* cwf.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = cwf.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1756B7E91F20E63900A419F4 /* ProtocolBuffers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProtocolBuffers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1756B7ED1F20F2D800A419F4 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		1756B7EE1F20F2D800A419F4 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		17EC0B371F21A36000BCE760 /* EditorUsed.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorUsed.xib; sourceTree = "<group>"; };
+		17EC0B391F21A9BC00BCE760 /* EditorUsed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorUsed.h; sourceTree = "<group>"; };
+		17EC0B3A1F21A9BC00BCE760 /* EditorUsed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorUsed.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,13 +173,15 @@
 				1756B7C31F20E61600A419F4 /* EditorForm.h */,
 				1756B7C41F20E61600A419F4 /* EditorForm.m */,
 				1756B7C51F20E61600A419F4 /* EditorForm.xib */,
-				1756B7C61F20E61600A419F4 /* EditorItem.h */,
-				1756B7C71F20E61600A419F4 /* EditorItem.m */,
-				1756B7C81F20E61600A419F4 /* EditorItem.xib */,
+				17EC0B391F21A9BC00BCE760 /* EditorUsed.h */,
+				17EC0B3A1F21A9BC00BCE760 /* EditorUsed.m */,
+				17EC0B371F21A36000BCE760 /* EditorUsed.xib */,
 				1756B7C91F20E61600A419F4 /* EntryEditorVC.h */,
 				1756B7CA1F20E61600A419F4 /* EntryEditorVC.m */,
 				1756B7CB1F20E61600A419F4 /* ListEntryVC.h */,
 				1756B7CC1F20E61600A419F4 /* ListEntryVC.m */,
+				1756B7ED1F20F2D800A419F4 /* LoginVC.h */,
+				1756B7EE1F20F2D800A419F4 /* LoginVC.m */,
 				1756B7CD1F20E61600A419F4 /* WebVC.h */,
 				1756B7CE1F20E61600A419F4 /* WebVC.m */,
 				1756B7931F20E5A700A419F4 /* AppDelegate.h */,
@@ -370,8 +375,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1756B7A01F20E5A700A419F4 /* LaunchScreen.storyboard in Resources */,
+				17EC0B381F21A36000BCE760 /* EditorUsed.xib in Resources */,
 				1756B79D1F20E5A700A419F4 /* Assets.xcassets in Resources */,
-				1756B7D21F20E61600A419F4 /* EditorItem.xib in Resources */,
 				1756B7D01F20E61600A419F4 /* EditorForm.xib in Resources */,
 				1756B79B1F20E5A700A419F4 /* Main.storyboard in Resources */,
 			);
@@ -398,13 +403,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1756B7D11F20E61600A419F4 /* EditorItem.m in Sources */,
 				1756B7D51F20E61600A419F4 /* WebVC.m in Sources */,
 				1756B7D41F20E61600A419F4 /* ListEntryVC.m in Sources */,
 				1756B7D31F20E61600A419F4 /* EntryEditorVC.m in Sources */,
 				1756B7951F20E5A700A419F4 /* AppDelegate.m in Sources */,
 				1756B7CF1F20E61600A419F4 /* EditorForm.m in Sources */,
+				1756B7EF1F20F2D800A419F4 /* LoginVC.m in Sources */,
 				1756B7921F20E5A700A419F4 /* main.m in Sources */,
+				17EC0B3B1F21A9BC00BCE760 /* EditorUsed.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,11 +567,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 78TPHVCJDH;
 				INFOPLIST_FILE = lse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.snows.lse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -574,11 +582,13 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 78TPHVCJDH;
 				INFOPLIST_FILE = lse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.snows.lse;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
@@ -651,6 +661,7 @@
 				1756B7BC1F20E5A800A419F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1756B7BD1F20E5A800A419F4 /* Build configuration list for PBXNativeTarget "lseTests" */ = {
 			isa = XCConfigurationList;
@@ -659,6 +670,7 @@
 				1756B7BF1F20E5A800A419F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1756B7C01F20E5A800A419F4 /* Build configuration list for PBXNativeTarget "lseUITests" */ = {
 			isa = XCConfigurationList;
@@ -667,6 +679,7 @@
 				1756B7C21F20E5A800A419F4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
