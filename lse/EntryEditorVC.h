@@ -26,6 +26,7 @@
 @property(nonatomic)IBOutlet UIView* wvbase;
 @property(nonatomic)IBOutlet WKWebView* webview;
 @property(nonatomic)IBOutlet UIButton* edit;
+@property(nonatomic)IBOutlet UIProgressView* progress;
 @property(nonatomic)EditorForm* form;
 //
 -(IBAction)onBack:(id)sender;

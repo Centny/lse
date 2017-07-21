@@ -18,6 +18,7 @@
     [super viewDidLoad];
     self.lastview.layer.borderColor = [[UIColor blackColor] colorWithAlphaComponent:.2].CGColor;
     self.lastview.layer.borderWidth =1.0;
+    
     //[self toEntryEidtor:@"https://mp.weixin.qq.com/s/Gc6jp74AVqFYYWSlanibGw"];
     // Do any additional setup after loading the view from its nib.
 }
@@ -29,11 +30,17 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(checkPasteboard) name:UIApplicationDidBecomeActiveNotification object:nil];
     if(self.token==nil){
         [self checkToken];
     }else{
         [self checkPasteboard];
     }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 -(void)toEntryEidtor:(NSString*)url{

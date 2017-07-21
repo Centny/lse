@@ -102,10 +102,21 @@
         self.webview=[[WKWebView alloc]initWithFrame:CGRectMake(0, 0, FRAM_W(self.wvbase), FRAM_H(self.wvbase)) configuration:[WKWebViewConfiguration new]];
         self.webview.navigationDelegate=self;
         [self.wvbase addSubview:self.webview];
+        [self.webview addObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress)) options:NSKeyValueObservingOptionNew context:NULL];
     }
     [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(estimatedProgress))] && object == self.webview) {
+        NSLog(@"%f", self.webview.estimatedProgress);
+        self.progress.progress=self.webview.estimatedProgress;
+        self.progress.hidden=self.progress.progress>=1.0;
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 - (void)webView:(WKWebView *)webView didFinishNavigation:(null_unspecified WKNavigation *)navigation{
     [self.webview evaluateJavaScript:@"document.title" completionHandler:^(id _Nullable res, NSError * _Nullable error) {
         if(error){
@@ -122,7 +133,8 @@
 }
 
 -(IBAction)onProcImg:(id)sender{
-    NSString* script=@"var url=''; for (var i in document.images) { var img = document.images[i];if(!img.getBoundingClientRect)continue; var bound = img.getBoundingClientRect(); if (bound && bound.top && bound.top > -100 && bound.top < 150) { url=img.src;break; } } url;";
+    NSString* script=[NSString stringWithFormat:@"var center = %f; var url = ''; var min = 100000; for (var i in document.images) { var img = document.images[i]; if (!img.getBoundingClientRect) continue; var bound = img.getBoundingClientRect(); var distrance = Math.abs(bound.top - center); if (distrance < min) { min = distrance; url = img.src; } } url;",FRAM_H(self.webview)/2];
+    
 //    script=@"var rs = []; for (var i in document.images) { var img = document.images[i]; if (img.getBoundingClientRect) { var bound = img.getBoundingClientRect(); rs.push({ src: img.src, top: bound.top }); } else { rs.push({ src: img.src }); } } rs;";
     [self.webview evaluateJavaScript:script completionHandler:^(id _Nullable res, NSError * _Nullable error) {
         if(error){
@@ -163,6 +175,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    [self.webview removeObserver:self forKeyPath:NSStringFromSelector(@selector(estimatedProgress))];
+}
 /*
 #pragma mark - Navigation
 
