@@ -144,7 +144,7 @@
         if([res length]){
             self.form.preview.url=res;
             self.form.image.text=res;
-            self.form.hidden=NO;
+            [self showEditor];
         }
     }];
 }
@@ -156,7 +156,7 @@
             return;
         }
         self.form.desc.text=res;
-        self.form.hidden=NO;
+        [self showEditor];
     }];
 }
 
@@ -168,6 +168,11 @@
         [self.edit setTitle:@"Edit" forState:UIControlStateNormal];
         self.form.hidden=YES;
     }
+}
+
+-(void)showEditor{
+    [self.edit setTitle:@"View" forState:UIControlStateNormal];
+    self.form.hidden=NO;
 }
 
 - (void)didReceiveMemoryWarning {

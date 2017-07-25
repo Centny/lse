@@ -9,7 +9,7 @@
 #import "ListEntryVC.h"
 
 @interface ListEntryVC ()
-
+@property(nonatomic)NSArray* items;
 @end
 
 @implementation ListEntryVC
@@ -28,19 +28,38 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.items.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if(cell==nil){
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.textLabel.text=[[self.items objectAtIndex:indexPath.row]objectForKey:@"title"];
+    return cell;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(checkPasteboard) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(needRefresh) name:UIApplicationDidBecomeActiveNotification object:nil];
     if(self.token==nil){
         [self checkToken];
+        [self refreshItems];
     }else{
-        [self checkPasteboard];
+        [self needRefresh];
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
+-(void)needRefresh{
+    [self checkPasteboard];
+    [self refreshItems];
 }
 
 -(void)toEntryEidtor:(NSString*)url{
@@ -71,7 +90,7 @@
 }
 
 -(IBAction)onWeb:(id)sender{
-    NSString* url=@"http://links.dev.gdy.io/";
+    NSString* url=@"http://links.chk.gdy.io/";
     [self performSegueWithIdentifier:@"WebVC" sender:[NSDictionary dictionaryWithObjectsAndKeys:url,@"url", nil]];
 }
 
@@ -106,6 +125,18 @@
         self.process.hidden=YES;
         [self onReady];
     } url:@"http://sso.kuxiao.cn/sso/api/uinfo?token=%@",stoken];
+}
+
+-(void)refreshItems{
+    [H doGetj:^(URLRequester *req, NSData *data, NSDictionary *json, NSError *err) {
+        if(err||[[json checkValueForKey:@"code"]intValue]!=0){
+            UIAlertView* view=[[UIAlertView alloc]initWithTitle:@"刷新失败" message:@"刷新列表失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [view show];
+            return;
+        }
+        NSDictionary* sdata=[json objectForKey:@"data"];
+        self.items=[sdata objectForKey:@"list"];
+    } url:@"http://sso.kuxiao.cn/sso/api/uinfo"];
 }
 
 @end

@@ -10,10 +10,16 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "EditorUsed.h"
 
+@interface EditorForm ()
+@property(nonatomic)EditorUsed* preused;
+@end
+
+
 @implementation EditorForm
 
 - (void)awakeFromNib{
     [super awakeFromNib];
+    self.preused=[UIView viewWithXib:@"EditorUsed"];
     [self.usedTags registerNib:[UINib nibWithNibName:@"EditorUsed" bundle:nil] forCellWithReuseIdentifier:@"text"];
     [self.usedFrom registerNib:[UINib nibWithNibName:@"EditorUsed" bundle:nil] forCellWithReuseIdentifier:@"text"];
     NSUserDefaults* def=[NSUserDefaults standardUserDefaults];
@@ -43,6 +49,17 @@
         return self.fromList.count;
     }
 }
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(self.usedTags==collectionView){
+        self.preused.text=[self.tagList objectAtIndex:indexPath.row];
+    }else{
+        self.preused.text=[self.fromList objectAtIndex:indexPath.row];
+    }
+    self.preused.title.frame=CGRectMake(5, 5, FRAM_W(collectionView), 20);
+    [self.preused.title sizeToFit];
+    return CGSizeMake(FRAM_W(self.preused.title)+10, FRAM_H(self.preused.title)+10);
+}
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -55,8 +72,6 @@
     }
     used.title.frame=CGRectMake(5, 5, FRAM_W(collectionView), 20);
     [used.title sizeToFit];
-    used.frame=CGRectMake(0, 0, FRAM_W(used.title)+10, FRAM_H(used.title)+10);
-//    used.btn.frame=CGRectMake(0, 0, FRAM_W(used.btn.titleLabel)+10, FRAM_H(used.btn.titleLabel)+10);
     return cell;
 }
 
@@ -157,13 +172,13 @@
     NSMutableDictionary* dargs=[NSMutableDictionary new];
     [dargs setValue:[self SHA1:self.base] forKey:@"iid"];
     [dargs setValue:[self urlencode:self.title.text] forKey:@"title"];
-    [dargs setValue:self.tags.text forKey:@"tags"];
-    [dargs setValue:self.from.text forKey:@"from"];
+    [dargs setValue:self.tags.text forKey:@"owner"];
+    [dargs setValue:self.from.text forKey:@"author"];
     [dargs setValue:[self urlencode:self.uploaded] forKey:@"img"];
     [dargs setValue:[self urlencode:self.base] forKey:@"link"];
     [dargs setValue:[self urlencode:self.desc.text] forKey:@"desc"];
     [dargs setValue:@"ARTICLE" forKey:@"type"];
-    [H doPost:[NSString stringWithFormat:@"http://links.dev.gdy.io/usr/api/upsertItem?token=%@",self.token] dargs:dargs json:^(URLRequester *req, NSData *data, NSDictionary *json, NSError *err) {
+    [H doPost:[NSString stringWithFormat:@"http://links.chk.gdy.io/usr/api/upsertItem?token=%@",self.token] dargs:dargs json:^(URLRequester *req, NSData *data, NSDictionary *json, NSError *err) {
         if(err){
             self.info.text=@"submit fail";
             return;
@@ -205,6 +220,9 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
+    if(self.image==textField){
+        self.preview.url=textField.text;
+    }
     return YES;
 }
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
